@@ -1,0 +1,19 @@
+{
+  "name": "my-new-project",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/appium-service": "^8.28.6",
+    "@wdio/cli": "^8.28.6",
+    "@wdio/local-runner": "^8.28.7",
+    "@wdio/mocha-framework": "^8.28.6",
+    "@wdio/spec-reporter": "^8.28.6",
+    "appium-xcuitest-driver": "^5.14.0",
+    "dotenv": "^16.3.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "wdio:android": "wdio run ./config/wdio.ios.conf.ts",
+    "wdio:ios": "wdio run ./config/wdio.ios.conf.ts"
+  }
+}
