@@ -7,40 +7,69 @@ export class BmiCalculatorScreen extends BaseScreen {
 
   // ---------------------- Getters --------------------------
 
-  get calculateBmiButtonElement() {
-    return $('~Calculate BMI');
-  }
-
-  get feetInputElement() {
-    return $('~Feet:input');
-  }
-
-  get inchesInputElement() {
-    return $('~Inches:input');
-  }
-
-  get poundsInputElement() {
-    return $('~Pounds:input');
-  }
-
-  get resetButtonElement() {
-    return $('~Reset');
+  static get screenTitleElement() {
+    return process.env.PLATFORM === 'ios'
+      ? $(`~${BaseScreen.getTestId('bmi-calculator-label')}`)
+      : $('~BMI Calculator');
   }
 
   static get calculatedBmiText() {
     return 'The calculated BMI is';
   }
 
-  static get screenTitleElement() {
-    return $('~BMI Calculator');
+  get calculateBmiButtonElement() {
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('calculate-bmi-btn')}`)
+      : $(`~Calculate BMI`);
   }
+
+  get heightFeetInputElement() {
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('feet')}`)
+      : $('~Feet');
+  }
+
+  get heightInchesInputElement() {
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('inches')}`)
+      : $('~Inches');
+  }
+
+  get weightPoundsInputElement() {
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('pounds')}`)
+      : $('~Pounds');
+  }
+
+  get resetButtonElement() {
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('reset-btn')}`)
+      : $('~Reset');
+  }
+
+  get englishUnitSwitch() {
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('english-unit-switch')}`)
+      : $('~English Unit Switch');
+  }
+
+  // get bmiResult() {
+  //   return this.platform === 'ios' ? $(`~bmi-result`) : $('~BMI Result');
+  // }
 
   // ---------------------- Functions --------------------------
 
+  // async calculatedBmi() {
+  //   const calculatedBmiElement = await this.bmiResult;
+
+  //   return calculatedBmiElement.getText();
+  // }
+
   async calculatedBmi(expectedBmi: string) {
-    const calculatedBmiElement = await $(
-      `~${BmiCalculatorScreen.calculatedBmiText} ${expectedBmi}`
-    );
+    const calculatedBmiElement =
+      this.platform === 'ios'
+        ? await $(`~${BmiCalculatorScreen.calculatedBmiText} ${expectedBmi}`)
+        : await $('~BMI Result');
 
     return calculatedBmiElement.getText();
   }
@@ -60,23 +89,23 @@ export class BmiCalculatorScreen extends BaseScreen {
   }
 
   async enterHeightInFeet(feet: string) {
-    const feetInputElement = await this.feetInputElement;
+    const heightFeetInputElement = await this.heightFeetInputElement;
 
-    await this.clearValue(feetInputElement);
-    await this.typeIntoElement(feetInputElement, feet);
+    // await this.clearValue(heightFeetInputElement);
+    await this.typeIntoElement(heightFeetInputElement, feet);
   }
 
   async enterHeightInInches(inches: string) {
-    const inchesInputElement = await this.inchesInputElement;
+    const heightInchesInputElement = await this.heightInchesInputElement;
 
-    await this.clearValue(inchesInputElement);
-    await this.typeIntoElement(inchesInputElement, inches);
+    // await this.clearValue(heightInchesInputElement);
+    await this.typeIntoElement(heightInchesInputElement, inches);
   }
 
   async enterWeightInPounds(weight: string) {
-    const weightInputElement = await this.poundsInputElement;
+    const weightInputElement = await this.weightPoundsInputElement;
 
-    await this.clearValue(weightInputElement);
+    // await this.clearValue(weightInputElement);
     await this.typeIntoElement(weightInputElement, weight);
   }
 

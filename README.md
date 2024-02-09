@@ -31,14 +31,21 @@ There are three configuration files in the _config_ directory:
 
 Copy the content of the .env.example file into the .env file.
 
-## Step 5: Run the tests
+## Step 5: Update the iOS and Android configuration files
+
+The iOS and Android configuration files will need to be updated with the simulators and emulators
+used on your local client.
+
+## Step 6: Run the tests
 
 Run one of the following commands from the _root_ of the project to test the application.
 
+**Note**: Do not run _appium_ when running one of the below test commands. Also, open the emulator or simulator before running the tests.
+
 ```bash
 # run tests on iOS simulator
-npm run wdio:ios
+npm run test:ios
 
 # run tests on Android Emulator
-npm run wdio:android
+npm run test:android
 ```

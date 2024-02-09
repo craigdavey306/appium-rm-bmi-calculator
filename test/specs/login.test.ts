@@ -8,7 +8,17 @@ const userPassword = process.env.USER_PASSWORD || '';
  * Login workflow tests for the application are below.
  */
 
+console.log(`platform: ${process.env.PLATFORM}`);
+
 describe('Login Workflows', () => {
+  it('finds the email input field', async () => {
+    const loginScreen = new LoginScreen();
+
+    const emailElement = await loginScreen.emailInputElement;
+
+    await expect(emailElement).toExist();
+  });
+
   it('Logs a user into the application', async () => {
     const loginScreen = new LoginScreen();
 

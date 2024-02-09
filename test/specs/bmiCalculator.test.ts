@@ -1,30 +1,15 @@
 import { BmiCalculatorScreen } from '../screen-objects/BmiCalculatorScreen.js';
-
-type BmiValues = {
-  heightFeet: string;
-  heightInches: string;
-  weightPounds: string;
-  expectedBmi: string;
-};
+import { ENGLISH_BMI_VALUES } from '../../data/bmi-data.js';
 
 /**
  * BMI Calculator test for the application are below.
  */
 
-describe('BMI Calculator', async () => {
-  it('Calculates BMI for valid inputs', async () => {
-    const bmiValues: BmiValues[] = [
-      {
-        heightFeet: '6',
-        heightInches: '1',
-        weightPounds: '221',
-        expectedBmi: '29.2',
-      },
-    ];
-
+describe('BMI Calculator English Units', async () => {
+  it('Calculates correct BMI for english inputs', async () => {
     const calcScreen = new BmiCalculatorScreen();
 
-    for (const bmi of bmiValues) {
+    for (const bmi of ENGLISH_BMI_VALUES) {
       await calcScreen.enterBmiValues(
         bmi.heightFeet,
         bmi.heightInches,
@@ -36,6 +21,8 @@ describe('BMI Calculator', async () => {
       await expect(calculatedBmi).toEqual(
         `${BmiCalculatorScreen.calculatedBmiText} ${bmi.expectedBmi}`
       );
+
+      calcScreen.pressResetButton();
     }
   });
 });

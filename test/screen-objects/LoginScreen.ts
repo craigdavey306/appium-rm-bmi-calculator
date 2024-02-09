@@ -8,15 +8,21 @@ export class LoginScreen extends BaseScreen {
   // ---------------------- Getters --------------------------
 
   get emailInputElement() {
-    return $('~Email-Address:input');
+    return this.platform == 'ios'
+      ? $(`~${BaseScreen.getTestId('email-address')}`)
+      : $('~Email Address');
   }
 
   get passwordInputElement() {
-    return $('~Password:input');
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('password')}`)
+      : $(`~Password`);
   }
 
   get loginButtonElement() {
-    return $('~Log In');
+    return this.platform === 'ios'
+      ? $(`~${BaseScreen.getTestId('log-in-btn')}`)
+      : $('~Log In');
   }
 
   // ---------------------- Functions --------------------------
@@ -31,7 +37,6 @@ export class LoginScreen extends BaseScreen {
   public async enterEmail(email: string) {
     const emailElement = await this.emailInputElement;
 
-    await this.clearValue(emailElement);
     await this.typeIntoElement(emailElement, email);
   }
 
@@ -45,7 +50,6 @@ export class LoginScreen extends BaseScreen {
   public async enterPassword(password: string) {
     const passwordElement = await this.passwordInputElement;
 
-    await this.clearValue(passwordElement);
     await this.typeIntoElement(passwordElement, password);
   }
 

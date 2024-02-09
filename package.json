@@ -1,5 +1,5 @@
 {
-  "name": "my-new-project",
+  "name": "appium-bmi-calc",
   "type": "module",
   "devDependencies": {
     "@wdio/appium-service": "^8.28.6",
@@ -13,7 +13,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "wdio:android": "wdio run ./config/wdio.ios.conf.ts",
-    "wdio:ios": "wdio run ./config/wdio.ios.conf.ts"
+    "test:android": "wdio run ./config/wdio.android.conf.ts",
+    "test:ios": "wdio run ./config/wdio.ios.conf.ts"
   }
 }

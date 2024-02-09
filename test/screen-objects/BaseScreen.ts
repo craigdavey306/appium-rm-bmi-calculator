@@ -1,8 +1,23 @@
+export type MobilePlatform = 'ios' | 'Android';
+
 /**
  * Class representing a base screen implementation.
  */
 export default class BaseScreen {
-  constructor() {}
+  protected platform: MobilePlatform;
+
+  constructor() {
+    this.platform = process.env.PLATFORM as MobilePlatform;
+  }
+
+  /**
+   * Transforms a string identifier into a testID.
+   * @param id string representing the test identifier
+   * @returns a string representing the test identifier
+   */
+  protected static getTestId(id: string): string {
+    return `${id}:testid`;
+  }
 
   /**
    * Schedules a command to clear the content of a screen element.
